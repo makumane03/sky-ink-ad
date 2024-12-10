@@ -1,0 +1,261 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Rotating Product Ad</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f4f4f4;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            margin: 0;
+        }
+        .carousel {
+            position: relative;
+            width: 90%;
+            max-width: 400px;
+            height: 500px;
+            border-radius: 10px;
+            overflow: hidden;
+            box-shadow: 0 4px 16px rgba(0, 0, 0, 0.2);
+            background-color: white;
+        }
+        .carousel-inner {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+        }
+        .carousel-item {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            opacity: 0;
+            transition: opacity 1s ease;
+            text-align: center;
+            padding: 20px;
+            box-sizing: border-box;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+        }
+        .carousel-item.active {
+            opacity: 1;
+        }
+        .carousel-item img {
+            width: 100%;
+            height: auto;
+            border-radius: 10px;
+            max-height: 250px;
+            transition: transform 0.3s ease;
+        }
+        .carousel-item img:hover {
+            transform: scale(1.05);
+        }
+        .description, .promotion, .testimonial, .countdown {
+            opacity: 0;
+            transition: opacity 0.5s ease;
+            margin-top: 10px;
+            font-size: 16px; /* Increased font size */
+        }
+        .description.show, .promotion.show, .testimonial.show, .countdown.show {
+            opacity: 1; /* Ensure text is visible */
+        }
+        .description {
+            color: blue; /* Changed to blue */
+        }
+        .promotion, .countdown {
+            color: black; /* Changed to black */
+            font-size: 18px; /* Increased font size for better visibility */
+        }
+        .whatsapp-button, .learn-more-button {
+            margin-top: 10px;
+            padding: 10px 15px;
+            border-radius: 5px;
+            color: white;
+            text-decoration: none;
+            cursor: pointer;
+        }
+        .whatsapp-button {
+            background-color: #25D366;
+        }
+        .whatsapp-button:hover {
+            background-color: #128C7E;
+        }
+        .learn-more-button {
+            background-color: #007bff;
+        }
+        .learn-more-button:hover {
+            background-color: #0056b3;
+        }
+        .call-to-action {
+            background-color: #ffd700;
+            padding: 10px;
+            text-align: center;
+            font-size: 20px; /* Increased font size */
+            font-weight: bold;
+            border-radius: 5px;
+            margin-top: 10px;
+        }
+        .new-arrival {
+            position: absolute;
+            top: 60px;
+            right: 10px;
+            background-color: #e4f0e7;
+            color: rgb(68, 13, 219);
+            padding: 5px 10px;
+            border-radius: 5px;
+            font-size: 14px; /* Adjusted font size */
+            font-weight: bold;
+        }
+        .navigation {
+            position: absolute;
+            bottom: 10px;
+            left: 50%;
+            transform: translateX(-50%);
+            display: flex;
+        }
+        .dot {
+            height: 10px;
+            width: 10px;
+            margin: 19px 5px;
+            background-color: #bbb;
+            border-radius: 50%;
+            display: inline-block;
+            cursor: pointer;
+            transition: background-color 0.3s; /* Smooth transition for dots */
+        }
+        .dot.active {
+            background-color: #717171;
+        }
+    </style>
+</head>
+<body>
+
+<div class="carousel">
+    <div class="carousel-inner">
+        <div class="carousel-item active">
+            <span class="new-arrival">New Arrival!</span>
+            <img src="sky.jpg" alt="Product 1">
+            <div class="description show">SkyInk: Your full-service printing solution for corporate, public, and institutional needs.</div>
+            <div class="promotion">Special Offer: 10% off this month!</div>
+            <a href="https://wa.me/+26658374842?text=I'm%20interested%20in%20Product%201!%20Here%20is%20the%20image:%20sky.jpg" class="whatsapp-button">Chat on WhatsApp</a>
+            <a href="https://facebook.com/YourPage" class="learn-more-button" target="_blank">Learn More</a>
+            <div class="testimonial">"This product changed my life!" - Happy Customer</div>
+            <div class="countdown" id="countdown1">Ends in: 3d 12h 30m</div>
+        </div>
+        <div class="carousel-item">
+            <span class="new-arrival">New Arrival!</span>
+            <img src="print.jpg" alt="Product 2">
+            <div class="description">Experience innovation with SkyInk—perfect for modern design professionals.</div>
+            <div class="promotion">Limited Time: Buy 2, Get 1 Free!</div>
+            <a href="https://wa.me/+26658374842?text=I'm%20interested%20in%20Product%202!%20Here%20is%20the%20image:%20print.jpg" class="whatsapp-button">Chat on WhatsApp</a>
+            <a href="https://facebook.com/YourPage" class="learn-more-button" target="_blank">Learn More</a>
+            <div class="testimonial">"The quality is unmatched!" - Satisfied Client</div>
+            <div class="countdown" id="countdown2">Ends in: 2d 8h 15m</div>
+        </div>
+        <div class="carousel-item">
+            <span class="new-arrival">New Arrival!</span>
+            <img src="before-top.jpg" alt="Product 3">
+            <div class="description">Unhappy with your clothes' color? Revamp your look with our efficient Design and Print services!</div>
+            <div class="promotion">Get 15% off your first order!</div>
+            <a href="https://wa.me/+26658374842?text=I'm%20interested%20in%20Product%203!%20Here%20is%20the%20image:%20before-top.jpg" class="whatsapp-button">Chat on WhatsApp</a>
+            <a href="https://facebook.com/YourPage" class="learn-more-button" target="_blank">Learn More</a>
+            <div class="testimonial">"Highly recommend this service!" - Loyal Customer</div>
+            <div class="countdown" id="countdown3">Ends in: 1d 6h 45m</div>
+        </div>
+        <div class="carousel-item">
+            <span class="new-arrival">New Arrival!</span>
+            <img src="after-top.jpg" alt="Product 4">
+            <div class="description">Happy Clients! Elevate your success with enhanced support from SkyInk.</div>
+            <div class="promotion">Exclusive: Free consultation!</div>
+            <a href="https://wa.me/+26658374842?text=I'm%20interested%20in%20Product%204!%20Here%20is%20the%20image:%20after-top.jpg" class="whatsapp-button">Chat on WhatsApp</a>
+            <a href="https://facebook.com/YourPage" class="learn-more-button" target="_blank">Learn More</a>
+            <div class="testimonial">"Fantastic results every time!" - Repeat Buyer</div>
+            <div class="countdown" id="countdown4">Ends in: 5d 12h 30m</div>
+        </div>
+        <div class="carousel-item">
+            <span class="new-arrival">New Arrival!</span>
+            <img src="ITEMS.jpg" alt="Product 5">
+            <div class="description">Maximize your potential with SkyInk's tailored print, design, and branding services.</div>
+            <div class="promotion">Sign up for our newsletter and get 5% off!</div>
+            <a href="https://wa.me/+26658374842?text=I'm%20interested%20in%20Product%205!%20Here%20is%20the%20image:%20ITEMS.jpg" class="whatsapp-button">Chat on WhatsApp</a>
+            <a href="https://facebook.com/YourPage" class="learn-more-button" target="_blank">Learn More</a>
+            <div class="testimonial">"Incredible customer service!" - Valued Client</div>
+            <div class="countdown" id="countdown5">Ends in: 4d 4h 20m</div>
+        </div>
+    </div>
+    <div class="navigation">
+        <div class="dot active" data-index="0"></div>
+        <div class="dot" data-index="1"></div>
+        <div class="dot" data-index="2"></div>
+        <div class="dot" data-index="3"></div>
+        <div class="dot" data-index="4"></div>
+    </div>
+    <div class="call-to-action">Design your dream outfit with us today!</div>
+</div>
+
+<script>
+    const items = document.querySelectorAll('.carousel-item');
+    const dots = document.querySelectorAll('.dot');
+    let currentIndex = 0;
+    let interval;
+
+    function showTextSequentially() {
+        const descriptions = items[currentIndex].querySelectorAll('.description, .promotion, .testimonial, .countdown');
+        descriptions.forEach((text, index) => {
+            setTimeout(() => {
+                text.classList.add('show'); // Show text
+            }, index * 500);
+        });
+    }
+
+    function hideText() {
+        const descriptions = items[currentIndex].querySelectorAll('.description, .promotion, .testimonial, .countdown');
+        descriptions.forEach(text => {
+            text.classList.remove('show'); // Hide text
+        });
+    }
+
+    function rotateProducts() {
+        hideText();
+        items[currentIndex].classList.remove('active');
+        dots[currentIndex].classList.remove('active');
+        currentIndex = (currentIndex + 1) % items.length;
+        items[currentIndex].classList.add('active');
+        dots[currentIndex].classList.add('active');
+        showTextSequentially();
+    }
+
+    function startCarousel() {
+        interval = setInterval(rotateProducts, 3000);
+        showTextSequentially();
+    }
+
+    function stopCarousel() {
+        clearInterval(interval);
+    }
+
+    document.querySelector('.carousel').addEventListener('mouseenter', stopCarousel);
+    document.querySelector('.carousel').addEventListener('mouseleave', startCarousel);
+
+    dots.forEach(dot => {
+        dot.addEventListener('click', () => {
+            hideText();
+            items[currentIndex].classList.remove('active');
+            dots[currentIndex].classList.remove('active');
+            currentIndex = parseInt(dot.dataset.index);
+            items[currentIndex].classList.add('active');
+            dots[currentIndex].classList.add('active');
+            showTextSequentially();
+        });
+    });
+
+    startCarousel();
+</script>
+
+</body>
+</html>
